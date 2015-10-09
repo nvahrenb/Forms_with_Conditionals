@@ -1,0 +1,46 @@
+<h1>State List</h1>
+
+<!-- iterate through each state in the array and put them into list items individually -->
+<form>
+
+	<% unless(params.empty?) %>
+		<p>This form has been submitted</p>
+	<% end %>
+
+	Full name:<br>
+ 		<input type="text" name="name" value=<%= params[:name] %>>
+ 	<br>
+
+ 	Address:<br>
+ 		<textarea name="address" rows="4" cols="50"><%= params[:address] %></textarea>
+ 	<br>
+
+ 	City:<br>
+ 		<input type="text" name="city" value=<%= params[:city] %> >
+ 	<br>
+
+	State:<br><select name="state">
+		<% @states.each do | s | %>
+			<% if(params[:state] == s[:id]) %>
+				<option selected="selected" value=<%= s[:id] %>><%= s[:name] %></option>
+			<% else %>
+ 				<option value=<%= s[:id] %>><%= s[:name] %></option>
+ 			<% end %>
+		<% end %>
+
+	</select><br>
+
+	Zip:<br>
+ 		<input type="text" name="zip" value=<%= params[:zip] %> >
+ 	<br>
+ 	<% if(params[:agree]) %>
+ 		<input type="checkbox" name="agree" value="1" checked="checked"> I agree...<br>
+ 	<% else %>
+ 		<input type="checkbox" name="agree" value="1"> I agree...<br>
+ 	<% end %>
+
+ 	<input type="submit" value="Submit">
+
+</form>
+
+<%= params %>
