@@ -2,12 +2,18 @@
 
 <!-- iterate through each state in the array and put them into list items individually -->
 <form>
-
 	<% unless(params.empty?) %>
+		<!-- jarp: you want to be more specific than params.empty?. I can add a param via url quite easily
+					tie it to a form element
+					http://localhost:4567/form?tricky=true
+		 -->
 		<p>This form has been submitted</p>
 	<% end %>
 
+	<!--  jarp: where are your labels? THey are a pain, aren't they -->
+
 	Full name:<br>
+		<!-- make sure the HTML Markup is valid. Value attribute values are not in quotes in this form -->
  		<input type="text" name="name" value=<%= params[:name] %>>
  	<br>
 
@@ -20,6 +26,10 @@
  	<br>
 
 	State:<br><select name="state">
+		<!-- jarp: it's better to just wrap the 'selected' in conditionals.
+		           what you are doing here is a lot of repeating
+		-->
+
 		<% @states.each do | s | %>
 			<% if(params[:state] == s[:id]) %>
 				<option selected="selected" value=<%= s[:id] %>><%= s[:name] %></option>
@@ -33,6 +43,8 @@
 	Zip:<br>
  		<input type="text" name="zip" value=<%= params[:zip] %> >
  	<br>
+
+ 	<!-- same here with 'checked' -->
  	<% if(params[:agree]) %>
  		<input type="checkbox" name="agree" value="1" checked="checked"> I agree...<br>
  	<% else %>
